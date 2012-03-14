@@ -1,6 +1,3 @@
-// comment!
-
-
 package edu.upenn.cis350;
 
 public class Student {
