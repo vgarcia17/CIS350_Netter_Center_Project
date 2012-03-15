@@ -2,13 +2,17 @@ package edu.upenn.cis350;
 
 import java.util.List;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  * Custom adapter for the ListView used in Roster.
@@ -41,7 +45,7 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 	
 	public View getView(int position, View convertView, ViewGroup viewGroup){
 		//gets entry associated with current row in ListView
-		RosterListItem entry = listRoster.get(position);
+		final RosterListItem entry = listRoster.get(position);
 		
 		//handles null case
 		if(convertView == null){
@@ -53,24 +57,27 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 		TextView tvRosterItemName = (TextView) convertView.findViewById(R.id.tvRosterItemName);
 		tvRosterItemName.setText(entry.getName());
 		
-		// handles Student Status
-		TextView tvRosterStatus = (TextView) convertView.findViewById(R.id.tvRosterStatus);
-		tvRosterStatus.setText(entry.getStatus());
-		
-		// button to cycle statuses
-        Button btnChange = (Button) convertView.findViewById(R.id.btnChange);
-        btnChange.setFocusableInTouchMode(false);
-        btnChange.setFocusable(false);
-        btnChange.setOnClickListener(this);
-        btnChange.setTag(entry);	// associates this row with this button
-        
+		//sets click listener for radio buttons - when clicked, changes status of RosterListItem
+		RadioGroup radios = (RadioGroup) convertView.findViewById(R.id.radio_group1);	 
+		radios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {  
+			public void onCheckedChanged(RadioGroup radiogroup, int checkedId){  
+				for(int i=0; i < radiogroup.getChildCount(); i++){  
+					RadioButton btn = (RadioButton) radiogroup.getChildAt(i);  
+					if(btn.getId() == checkedId){  
+						{  
+							entry.setStatus(btn.getText()+"");                   
+							return;    
+						}      
+					}  
+				}
+			}
+		});
+		radios.setTag(entry);
         return convertView;
 	}
 	
 	//handles button click for specific row in the ListView
     public void onClick(View view) {
-        RosterListItem entry = (RosterListItem) view.getTag();
-        entry.cycleStatus();
         notifyDataSetChanged();
     }
 	

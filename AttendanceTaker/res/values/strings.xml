@@ -10,5 +10,8 @@
     <string name="TakeAttendance">Take Attendance</string>
     <string name="ViewRoster">View Roster</string>
     <string name="AddActivity">Add Activity</string>
+    <string name="rad_option1">Present</string>
+    <string name="rad_option2">Absent</string>
+    <string name="rad_option3">Late</string>
 
 </resources>

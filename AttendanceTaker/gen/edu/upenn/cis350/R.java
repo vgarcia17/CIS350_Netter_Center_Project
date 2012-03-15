@@ -17,25 +17,37 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int Button01=0x7f060007;
-        public static final int Button02=0x7f060008;
-        public static final int MyTopButton=0x7f060009;
-        public static final int RosterItemLinLay=0x7f060001;
-        public static final int RosterList=0x7f06000b;
-        public static final int btnChange=0x7f060004;
-        public static final int button1=0x7f060000;
-        public static final int button2=0x7f06000a;
-        public static final int password=0x7f060006;
-        public static final int tvRosterItemName=0x7f060002;
-        public static final int tvRosterStatus=0x7f060003;
-        public static final int username=0x7f060005;
+        public static final int ActivitiesEditList=0x7f060006;
+        public static final int ActivitiesList=0x7f060000;
+        public static final int ActivityItemLinLay=0x7f060003;
+        public static final int MyTopButton=0x7f060011;
+        public static final int RosterItemLinLay=0x7f060009;
+        public static final int RosterList=0x7f060013;
+        public static final int addActivity=0x7f060008;
+        public static final int back=0x7f060007;
+        public static final int btnEdit=0x7f060005;
+        public static final int button1=0x7f060002;
+        public static final int button2=0x7f060012;
+        public static final int editActivities=0x7f060001;
+        public static final int login=0x7f060010;
+        public static final int passwordField=0x7f06000f;
+        public static final int radio_group1=0x7f06000b;
+        public static final int radiobutton1=0x7f06000c;
+        public static final int radiobutton2=0x7f06000d;
+        public static final int submitRoster=0x7f060014;
+        public static final int tvActivityName=0x7f060004;
+        public static final int tvRosterItemName=0x7f06000a;
+        public static final int usernameField=0x7f06000e;
     }
     public static final class layout {
-        public static final int activity=0x7f030000;
-        public static final int attendance=0x7f030001;
-        public static final int list_item=0x7f030002;
-        public static final int main=0x7f030003;
-        public static final int roster=0x7f030004;
+        public static final int activitieslist=0x7f030000;
+        public static final int activity=0x7f030001;
+        public static final int activity_item=0x7f030002;
+        public static final int attendance=0x7f030003;
+        public static final int editactivities=0x7f030004;
+        public static final int list_item=0x7f030005;
+        public static final int main=0x7f030006;
+        public static final int roster=0x7f030007;
     }
     public static final class string {
         public static final int AddActivity=0x7f040007;
@@ -46,5 +58,8 @@ public final class R {
         public static final int ViewRoster=0x7f040006;
         public static final int app_name=0x7f040001;
         public static final int hello=0x7f040000;
+        public static final int rad_option1=0x7f040008;
+        public static final int rad_option2=0x7f040009;
+        public static final int rad_option3=0x7f04000a;
     }
 }

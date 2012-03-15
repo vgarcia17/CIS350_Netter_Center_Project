@@ -1,14 +1,9 @@
 package edu.upenn.cis350;
 
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
 
 public class AttendanceTakerActivity extends Activity {
 
@@ -16,6 +11,8 @@ public class AttendanceTakerActivity extends Activity {
     public static final int ACTIVITY_Attendance = 1;
     public static final int ACTIVITY_Roster = 2;
     public static final int ACTIVITY_AddActivity = 3;
+    public static final int ACTIVITY_ActivitiesList = 4;
+    public static final int ACTIVITY_EditActivities = 5;
 
 	/** Called when the activity is first created. */
     @Override
@@ -24,7 +21,7 @@ public class AttendanceTakerActivity extends Activity {
         setContentView(R.layout.main);
         showDialog(LOGIN_DIALOG);
     }
-    
+    /*
     protected Dialog onCreateDialog(int id) {
     	if (id == LOGIN_DIALOG) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -47,26 +44,24 @@ public class AttendanceTakerActivity extends Activity {
     	else return null;
     }
     
-    // quit application entirely
-    public void onAttendanceClick(View view) {
-    	Intent i = new Intent(this, Attendance.class);
-    	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_Attendance);
-    }
-    
-    // quit application entirely
     public void onRosterClick(View view) {
     	Intent i = new Intent(this, Roster.class);
     	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_Roster);
     }
     
-    
-    // quit application entirely
     public void onActivityClick(View view) {
     	Intent i = new Intent(this, AddActivity.class);
     	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
     }
+    */
     
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+    public void onLoginClick(View view) {
+    	Intent i = new Intent(this, ActivitiesList.class);
+    	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_ActivitiesList);
+    }
+    
+    @Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
     	super.onActivityResult(requestCode, resultCode, intent);
     }
 }

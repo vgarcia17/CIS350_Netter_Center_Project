@@ -16,10 +16,10 @@
         android:layout_weight="1" />
     
     <Button
-        android:id="@+id/editActivities"
-        android:text="Edit Activities"
+        android:id="@+id/addActivity"
+        android:text="Add Activity"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="onEditActivitiesClick" />
+        android:onClick="onAddActivityClick" />
 
 </LinearLayout>

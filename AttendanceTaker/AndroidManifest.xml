@@ -22,6 +22,8 @@
       	<activity android:name="Attendance" />
       	<activity android:name="Roster" />
       	<activity android:name="AddActivity" />
+      	<activity android:name="ActivitiesList" />
+      	<activity android:name="EditActivities" />
       	
     </application>
 

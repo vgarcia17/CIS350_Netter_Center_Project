@@ -7,19 +7,25 @@
     <TextView 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Activities" />
+        android:text="Edit Activities" />
     
     <ListView 
-        android:id="@+id/ActivitiesList"
+        android:id="@+id/ActivitiesEditList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1" />
+        android:layout_height="wrap_content" />
     
     <Button
-        android:id="@+id/editActivities"
-        android:text="Edit Activities"
+        android:id="@+id/back"
+        android:text="Back"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:onClick="onEditActivitiesClick" />
+        android:onClick="onBackButtonClick" />
+    
+    <Button
+        android:id="@+id/addActivity"
+        android:text="Add Activity"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onAddActivityClick" />
 
 </LinearLayout>

@@ -11,16 +11,25 @@
 	    android:layout_height="wrap_content"
 	    android:padding="10dp"
 	    android:textSize="16sp" ></TextView>
-	<TextView 
-	    android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-        android:text="Present"
-        android:gravity="right"
-        android:id="@+id/tvRosterStatus" android:textSize="13sp" android:layout_weight="1"></TextView>
-	<Button 
-	    android:layout_width="wrap_content" 
-	    android:id="@+id/btnChange" 
-	    android:text="Change" 
-	    android:layout_height="40dip"></Button>
+	<RadioGroup
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="right"
+    android:id="@+id/radio_group1">
+	    <RadioButton
+	        android:id="@+id/radiobutton1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/rad_option1"
+	        android:checked="true"
+	        android:textColor="#0f0"/>
+	    <RadioButton
+	        android:id="@+id/radiobutton2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/rad_option2"
+	        android:textColor="#f00" />
+	</RadioGroup>
 </LinearLayout>
 

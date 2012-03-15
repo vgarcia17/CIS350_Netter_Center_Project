@@ -3,13 +3,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
-import android.app.ListActivity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -32,6 +33,15 @@ public class Roster extends Activity{
         setContentView(R.layout.roster);
         
         ListView list = (ListView) findViewById(R.id.RosterList);
+        
+        Log.v("list", list +" "+ findViewById(R.id.RosterList));
+        
+        //handles null case
+  		if(list == null){
+  			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+  			list = (ListView) inflater.inflate(R.id.RosterList, null);
+  		}
+        
         list.setClickable(true);
         
         listOfItems = populateRoster();
@@ -42,16 +52,13 @@ public class Roster extends Activity{
         list.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
-            // When clicked, show a toast with the TextView text
-            Toast.makeText(getApplicationContext(), listOfItems.get(position).getStatus(),
-            Toast.LENGTH_SHORT).show();
-            
-            Intent i = new Intent(view.getContext(), AddActivity.class);
-        	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
+            //Intent i = new Intent(view.getContext(), AddActivity.class);
+        	//startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
           }
         });
         
         list.setAdapter(adapter);
+        
     }
 	
     /** handles click for Back button **/
@@ -61,8 +68,9 @@ public class Roster extends Activity{
 		finish();	
 	}
 	
-	/** handles click for Edit button **/
-	public void onEditButtonClick(View view) {
+	/** handles click for Back button **/
+	public void onSubmitButtonClick(View view) {
+		//do some stuff with Google Spreadsheets
 		if(listOfItems == null){
 			Toast.makeText(getApplicationContext(), "No Students in Roster",
 	                Toast.LENGTH_SHORT).show();
@@ -75,6 +83,11 @@ public class Roster extends Activity{
 			Toast.makeText(getApplicationContext(), output,
 	                Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	/** handles click for Edit button **/
+	public void onEditButtonClick(View view) {
+		
 	}
 	
 	/** creates and populates roster **/
