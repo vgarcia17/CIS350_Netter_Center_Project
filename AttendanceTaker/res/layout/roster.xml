@@ -3,44 +3,44 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_below="@+id/MyTopButton"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="3dp" >
 
-    <LinearLayout
+    <TextView 
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@android:drawable/bottom_bar"
-        android:orientation="horizontal"
-        android:paddingBottom="1.0dip"
-        android:paddingLeft="4.0dip"
-        android:paddingRight="4.0dip"
-        android:paddingTop="5.0dip" >
-
-        <Button
-            android:id="@+id/button1"
-            android:layout_width="0.0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:text="Edit" 
-            android:onClick="onEditButtonClick"/>
-
-        <Button
-            android:id="@+id/button2"
-            android:layout_width="0.0dip"
-            android:layout_height="fill_parent"
-            android:layout_weight="1.0"
-            android:text="Back" 
-            android:onClick="onBackButtonClick"/>
-    </LinearLayout>
+        android:text="Students"
+        android:textSize="32sp"
+        android:gravity="center_horizontal"
+        android:textColor="#0099CC" />
 
     <ListView
         android:id="@+id/RosterList"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
     <Button
+        android:background="@drawable/blue_button"
+        android:textColor="#ffffff"
+        android:id="@+id/addStudent"
+        android:text="Add Student"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="3dp"
+        android:onClick="onAddStudentClick" />
+        
+    <Button
+        android:background="@drawable/blue_button"
+        android:textColor="#ffffff"
         android:id="@+id/submitRoster"
         android:text="Submit"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:paddingTop="3dp"
         android:onClick="onSubmitButtonClick" />
 
 </LinearLayout>

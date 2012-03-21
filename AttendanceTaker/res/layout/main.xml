@@ -2,13 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp" >
+
+    <ImageView
+        android:id="@+id/Logoh"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:layout_weight="1" />
     
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username" />
+            android:text="Username"
+            android:textColor="#0099CC" />
         
         <EditText
             android:id="@+id/usernameField"
@@ -18,18 +28,38 @@
         <TextView 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Password" />
+            android:text="Password"
+            android:textColor="#0099CC" />
         
         <EditText
             android:id="@+id/passwordField"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-        
-        <Button
-    	    android:id="@+id/login"
-    	    android:text="Login"
-    	    android:layout_width="wrap_content"
-    	    android:layout_height="wrap_content"
-    	    android:onClick="onLoginClick" />
+            android:layout_height="wrap_content"
+            android:password="true" />
+
+         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    		android:layout_width="match_parent"
+    		android:layout_height="wrap_content"
+    		android:orientation="horizontal"
+    		android:background="#ffffff" >
+    	
+	        <Button
+	    	    android:id="@+id/login"
+	    	    android:background="@drawable/blue_button"
+	    	    android:textColor="#ffffff"
+	    	    android:text="Login"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:onClick="onLoginClick" />
+	        
+	        	        <Button
+	    	    android:id="@+id/register"
+	    	    android:background="@drawable/blue_button"
+	    	    android:textColor="#ffffff"
+	    	    android:text="Register"
+	    	    android:layout_width="wrap_content"
+	    	    android:layout_height="wrap_content"
+	    	    android:onClick="onRegisterClick" />
+	       </LinearLayout>
 
 </LinearLayout>

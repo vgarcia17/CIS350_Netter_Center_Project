@@ -24,6 +24,7 @@
       	<activity android:name="AddActivity" />
       	<activity android:name="ActivitiesList" />
       	<activity android:name="EditActivities" />
+      	<activity android:name="ProfileActivity" />
       	
     </application>
 

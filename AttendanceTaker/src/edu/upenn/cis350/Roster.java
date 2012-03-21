@@ -3,14 +3,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -25,17 +31,22 @@ import android.widget.Toast;
 public class Roster extends Activity{
 
 	private List<RosterListItem> listOfItems;
+	private static final int ADD_STUDENT = 0;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roster);
-        
+        listOfItems = populateRoster();
+        createRoster(); 
+    }
+    
+    public void createRoster() {
+    	
         ListView list = (ListView) findViewById(R.id.RosterList);
         
         Log.v("list", list +" "+ findViewById(R.id.RosterList));
-        
         //handles null case
   		if(list == null){
   			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -43,8 +54,6 @@ public class Roster extends Activity{
   		}
         
         list.setClickable(true);
-        
-        listOfItems = populateRoster();
 
         RosterAdapter adapter = new RosterAdapter(this, listOfItems);
         
@@ -52,22 +61,22 @@ public class Roster extends Activity{
         list.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
-            //Intent i = new Intent(view.getContext(), AddActivity.class);
-        	//startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
+        	  String name = listOfItems.get(position).getName();
+        	  Intent i = new Intent(view.getContext(), ProfileActivity.class);
+        	  i.putExtra("name", name);
+        	  startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_ProfileActivity);
           }
         });
         
         list.setAdapter(adapter);
-        
+ 
     }
+
 	
-    /** handles click for Back button **/
-	public void onBackButtonClick(View view) {
-		Intent i = new Intent();
-		setResult(RESULT_OK, i);
-		finish();	
-	}
-	
+    public void onAddStudentClick(View view) {
+    	showDialog(ADD_STUDENT);
+    }
+    
 	/** handles click for Back button **/
 	public void onSubmitButtonClick(View view) {
 		//do some stuff with Google Spreadsheets
@@ -85,11 +94,50 @@ public class Roster extends Activity{
 		}
 	}
 	
-	/** handles click for Edit button **/
-	public void onEditButtonClick(View view) {
-		
-	}
-	
+    protected Dialog onCreateDialog(int id) {
+    	if (id == ADD_STUDENT) {
+	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("Enter student name");
+            LinearLayout ll = new LinearLayout(this);
+            ll.setOrientation(1);
+            final EditText input = new EditText(this);
+	        ll.addView(input);
+	        builder.setView(ll);
+	    	builder.setPositiveButton("Add", new DialogInterface.OnClickListener() {
+	    		public void onClick(DialogInterface dialog, int id) {
+	    			Editable activity = input.getText();
+	    	        String activity_string = activity.toString();
+	    	        boolean activity_already_exists = false;
+	    	        for(int i = 0; i < listOfItems.size(); i++) {
+	    	        	if(listOfItems.get(i).getName().equals(activity_string)) {
+	    	        		activity_already_exists = true;
+	    	        	}
+	    	        }
+	    	        if(activity_already_exists) {
+    	        		Context context = getApplicationContext();
+    	        		CharSequence text = "Activity already exists.";
+    	        		int duration = Toast.LENGTH_SHORT;
+    	        		Toast toast = Toast.makeText(context, text, duration);
+    	        		dialog.cancel();
+    	        		toast.show();
+	    	        }
+	    	        else {
+	    	        	listOfItems.add(new RosterListItem(activity_string, "Present"));
+	    	        	dialog.cancel();
+	    	        	createRoster();
+	    	        }
+	    	    }
+	    	 });
+	    	builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+	    		public void onClick(DialogInterface dialog, int id) {
+	    			dialog.cancel();
+	    		}
+	    	});
+	    	return builder.create();
+    	}
+    	else return null;
+    }
+    
 	/** creates and populates roster **/
 	public List<RosterListItem> populateRoster(){
 		List<RosterListItem> lst = new ArrayList<RosterListItem>();

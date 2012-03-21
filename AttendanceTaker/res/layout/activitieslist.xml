@@ -2,12 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    android:background="#ffffff"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="3dp" >
     
     <TextView 
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Activities" />
+        android:text="Activities"
+        android:textSize="32sp"
+        android:gravity="center_horizontal"
+        android:textColor="#0099CC" />
     
     <ListView 
         android:id="@+id/ActivitiesList"
@@ -16,6 +23,8 @@
         android:layout_weight="1" />
     
     <Button
+        android:background="@drawable/blue_button"
+        android:textColor="#ffffff"
         android:id="@+id/addActivity"
         android:text="Add Activity"
         android:layout_width="fill_parent"

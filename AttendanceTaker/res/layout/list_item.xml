@@ -4,18 +4,19 @@
     android:layout_width="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android"
     android:paddingLeft="10sp" android:paddingRight="10sp"
     android:layout_height="wrap_content"
-    android:orientation="horizontal" android:paddingTop="2sp">
+    android:orientation="horizontal" 
+    android:gravity="center_vertical"
+    android:paddingTop="2sp">
 	<TextView 
 	    android:id="@+id/tvRosterItemName"
-	    android:layout_width="wrap_content"
+	    android:layout_width="320px"
 	    android:layout_height="wrap_content"
-	    android:padding="10dp"
-	    android:textSize="16sp" ></TextView>
+	    android:textSize="16sp"
+	    android:textColor="#0099CC" ></TextView>
 	<RadioGroup
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="right"
+    android:orientation="vertical"
     android:id="@+id/radio_group1">
 	    <RadioButton
 	        android:id="@+id/radiobutton1"
@@ -23,13 +24,15 @@
 	        android:layout_height="wrap_content"
 	        android:text="@string/rad_option1"
 	        android:checked="true"
-	        android:textColor="#0f0"/>
+	        android:textColor="#0099CC"
+	        android:textSize="12sp"/>
 	    <RadioButton
 	        android:id="@+id/radiobutton2"
 	        android:layout_width="wrap_content"
 	        android:layout_height="wrap_content"
 	        android:text="@string/rad_option2"
-	        android:textColor="#f00" />
+	        android:textSize="12sp"
+	        android:textColor="#FAAB50" />
 	</RadioGroup>
 </LinearLayout>
 

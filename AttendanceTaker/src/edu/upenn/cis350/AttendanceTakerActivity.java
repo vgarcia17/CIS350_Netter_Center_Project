@@ -1,9 +1,11 @@
 package edu.upenn.cis350;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 public class AttendanceTakerActivity extends Activity {
 
@@ -13,6 +15,7 @@ public class AttendanceTakerActivity extends Activity {
     public static final int ACTIVITY_AddActivity = 3;
     public static final int ACTIVITY_ActivitiesList = 4;
     public static final int ACTIVITY_EditActivities = 5;
+    public static final int ACTIVITY_ProfileActivity = 6;
 
 	/** Called when the activity is first created. */
     @Override
@@ -22,6 +25,7 @@ public class AttendanceTakerActivity extends Activity {
         showDialog(LOGIN_DIALOG);
     }
     /*
+     * https://docs.google.com/spreadsheet/ccc?key=0AnxAdFnBqUmwdGI2ZUVaRG5yOHlHdjh6NHpZdExxVUE
     protected Dialog onCreateDialog(int id) {
     	if (id == LOGIN_DIALOG) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -58,6 +62,14 @@ public class AttendanceTakerActivity extends Activity {
     public void onLoginClick(View view) {
     	Intent i = new Intent(this, ActivitiesList.class);
     	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_ActivitiesList);
+    }
+    
+    public void onRegisterClick(View view) {
+    	Context context = getApplicationContext();
+		CharSequence text = "Registration not available yet.";
+		int duration = Toast.LENGTH_SHORT;
+		Toast toast = Toast.makeText(context, text, duration);
+		toast.show();
     }
     
     @Override

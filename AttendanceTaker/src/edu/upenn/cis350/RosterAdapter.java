@@ -2,17 +2,15 @@ package edu.upenn.cis350;
 
 import java.util.List;
 import android.content.Context;
-import android.util.Log;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 /**
  * Custom adapter for the ListView used in Roster.
@@ -59,6 +57,13 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 		
 		//sets click listener for radio buttons - when clicked, changes status of RosterListItem
 		RadioGroup radios = (RadioGroup) convertView.findViewById(R.id.radio_group1);	 
+		radios.setFocusable(false);
+		radios.setFocusableInTouchMode(false);
+		for(int i=0; i < radios.getChildCount(); i++){  
+			RadioButton btn = (RadioButton) radios.getChildAt(i);  
+			btn.setFocusable(false);
+			btn.setFocusableInTouchMode(false);
+		}
 		radios.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {  
 			public void onCheckedChanged(RadioGroup radiogroup, int checkedId){  
 				for(int i=0; i < radiogroup.getChildCount(); i++){  

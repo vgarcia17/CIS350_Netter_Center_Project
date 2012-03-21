@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:paddingLeft="3dp"
+    android:paddingBottom="3dp"
+    android:paddingRight="3dp" >
+
+    <ImageView
+        android:id="@+id/profileIcon"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:src="@drawable/icon" />
+	   
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.10"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="150px"
+            android:layout_height="wrap_content"
+            android:text="Student Name: "
+            android:textColor="#0099CC" 
+           />
+
+        <TextView
+            android:id="@+id/profileName"
+			android:layout_width="250px"            
+			android:layout_height="wrap_content"
+            android:textColor="#000000" 
+            />
+
+        <Button
+            android:id="@+id/profileEdit"
+			android:layout_width="65px"            
+			android:layout_height="wrap_content"
+            android:background="@drawable/blue_button"
+            android:onClick="onEditNameButtonClick"
+            android:text="Edit"
+            android:textColor="#ffffff" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.12"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="150px"
+            android:layout_height="wrap_content"
+            android:text="Phone: "
+            android:textColor="#0099CC" />
+
+        <TextView
+            android:id="@+id/profilePhone"
+            android:layout_width="250px"
+            android:layout_height="wrap_content"
+            android:autoLink="phone"
+            android:text="123-453-2342"
+            android:textColor="#000000" />
+        
+         <Button
+        android:background="@drawable/blue_button"
+        android:textColor="#ffffff"
+        android:id="@+id/profileEdit"
+        android:layout_width="65px"
+        android:layout_height="wrap_content"
+        android:onClick="onEditPhoneButtonClick"
+        android:text="Edit" />
+        
+    </LinearLayout>
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.99"
+        android:background="#ffffff"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="150px"
+            android:layout_height="wrap_content"
+            android:text="Address: "
+            android:textColor="#0099CC" />
+
+        <TextView
+            android:id="@+id/profileAddress"
+            android:layout_width="250px"
+            android:layout_height="119dp"
+            android:text="20 S. 39 St. Apt S3\nPhiladelphia, PA 19104"
+            android:textColor="#000000" />
+        
+         <Button
+        android:background="@drawable/blue_button"
+        android:textColor="#ffffff"
+        android:id="@+id/profileEdit"
+        android:layout_width="65px"
+        android:layout_height="wrap_content"
+        android:onClick="onEditAddressButtonClick"
+        android:text="Edit" />
+        
+    </LinearLayout>
+
+</LinearLayout>

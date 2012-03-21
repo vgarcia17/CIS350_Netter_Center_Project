@@ -2,7 +2,7 @@
 <resources>
 
     <string name="hello">Hello World, CIS350PROJECTActivity!</string>
-    <string name="app_name">CIS350PROJECT</string>
+    <string name="app_name">ROLL CALL</string>
     <string name="EnterUserName">Please Enter Your Username</string>
     <string name="EnterPassword">Please Enter Your Password</string>
     <color name="blue">#0000ff</color>
