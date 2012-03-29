@@ -46,8 +46,6 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + KEY_USERID + " INTEGER" + ")";
     	db.execSQL(CREATE_ACTIVITY_TABLE);
     	
-    	
-    	
     	String CREATE_STUDENT_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_STUDENT + "("
     			+ KEY_STUD_ID + " INTEGER PRIMARY KEY," + KEY_STUD_GRADE + " INTEGER,"
     			+ KEY_STUD_NAME + " TEXT,"
@@ -65,6 +63,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
     	//drop older table if existed
     	//db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACTIVITY);
+    	//db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
     	
     	//create tables again
     	onCreate(db);

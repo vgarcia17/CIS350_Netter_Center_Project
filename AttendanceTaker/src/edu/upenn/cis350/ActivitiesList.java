@@ -90,7 +90,6 @@ public class ActivitiesList extends Activity {
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	//listOfItems.add(new ActivitiesListItem(activity_string));
 	    	        	db.addActivity(new ActivityObject(activity_string, 123));
 	    	        	dialog.cancel();
 	    	        	createList();

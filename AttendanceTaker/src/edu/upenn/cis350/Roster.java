@@ -24,8 +24,6 @@ import android.widget.Toast;
  * extends ListActivity. Each list item is defined in list_item.xml, 
  * while the overall layout is defined in roster.xml
  *
- * TODO: 	-when clicked, each list item should go to corresponding profile
- * 			-pull names from persistent data source
  */
 public class Roster extends Activity{
 
@@ -144,10 +142,6 @@ public class Roster extends Activity{
 	/** creates and populates roster **/
 	public List<StudentObject> populateRoster(){
 		List<StudentObject> actlist = db.getAllStudents();
-		//List<RosterListItem> lst = new ArrayList<RosterListItem>();
-		//lst.add(new RosterListItem("Sean W.", "Present"));
-        //lst.add(new RosterListItem("Christian C.", "Present"));
-        //lst.add(new RosterListItem("Rupi S.", "Present"));
 		return actlist;
 	}
 
