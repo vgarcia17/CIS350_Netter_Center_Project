@@ -46,7 +46,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     }
     
     //add new activity
-    public void addActivity(Activity activity){
+    public void addActivity(ActivityObject activity){
     	SQLiteDatabase db = this.getWritableDatabase();
     	
     	ContentValues values = new ContentValues();
@@ -59,7 +59,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     }
     
     //gets an activity
-    public Activity getContact(int id){
+    public ActivityObject getContact(int id){
     	SQLiteDatabase db = this.getReadableDatabase();
     	
     	Cursor cursor = db.query(TABLE_ACTIVITY, new String[] { KEY_ID,
@@ -68,14 +68,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         if (cursor != null)
             cursor.moveToFirst();
      
-        Activity activity = new Activity(Integer.parseInt(cursor.getString(0)),
+        ActivityObject activity = new ActivityObject(Integer.parseInt(cursor.getString(0)),
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)));
        
         return activity;
     }
     
-    public List<Activity> getAllActivities() {
-        List<Activity> activityList = new ArrayList<Activity>();
+    public List<ActivityObject> getAllActivities() {
+        List<ActivityObject> activityList = new ArrayList<ActivityObject>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_ACTIVITY;
  
@@ -85,7 +85,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-            	Activity activity = new Activity();
+            	ActivityObject activity = new ActivityObject();
                 activity.setID(Integer.parseInt(cursor.getString(0)));
                 activity.setName(cursor.getString(1));
                 activity.setUserId(Integer.parseInt(cursor.getString(2)));
