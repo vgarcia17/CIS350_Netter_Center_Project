@@ -61,7 +61,8 @@ public class ActivitiesList extends Activity {
     	showDialog(ADD_ACTIVITY);
     }
     
-    protected Dialog onCreateDialog(int id) {
+    @Override
+	protected Dialog onCreateDialog(int id) {
     	if (id == ADD_ACTIVITY) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Enter activity name");

@@ -1,1 +1,4 @@
-.metadata/
+.metadata
+.DS_Store
+AttendanceTaker/bin
+AttendanceTaker/gen

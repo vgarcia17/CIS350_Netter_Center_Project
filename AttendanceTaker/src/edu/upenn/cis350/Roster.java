@@ -94,7 +94,8 @@ public class Roster extends Activity{
 		}
 	}
 	
-    protected Dialog onCreateDialog(int id) {
+    @Override
+	protected Dialog onCreateDialog(int id) {
     	if (id == ADD_STUDENT) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Enter student name");
