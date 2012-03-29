@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +24,14 @@ public class AttendanceTakerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         showDialog(LOGIN_DIALOG);
+        //DatabaseHandler db = new DatabaseHandler(this);
+        
+        /*Log.d("Insert: ", "Inserting ..");
+        db.addActivity(new edu.upenn.cis350.Activity("coding", 234));
+        db.addActivity(new edu.upenn.cis350.Activity("chipotle", 124));
+        db.addActivity(new edu.upenn.cis350.Activity("class", 5234));
+        
+        db.close();*/
     }
     /*
      * https://docs.google.com/spreadsheet/ccc?key=0AnxAdFnBqUmwdGI2ZUVaRG5yOHlHdjh6NHpZdExxVUE

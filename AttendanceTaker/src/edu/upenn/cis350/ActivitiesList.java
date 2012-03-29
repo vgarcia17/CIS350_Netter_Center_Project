@@ -3,6 +3,7 @@ package edu.upenn.cis350;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -23,14 +24,17 @@ public class ActivitiesList extends Activity {
 
 	private List<ActivitiesListItem> listOfItems;
 	private static final int ADD_ACTIVITY = 0;
+	private DatabaseHandler db;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitieslist);
+        db = new DatabaseHandler(this);
         listOfItems = populateList();
         createList();
+        
     }
     
     public void createList() {
@@ -103,10 +107,11 @@ public class ActivitiesList extends Activity {
     
     /** creates and populates roster **/
 	public List<ActivitiesListItem> populateList(){
+		List<edu.upenn.cis350.Activity> actlist = db.getAllActivities();
 		List<ActivitiesListItem> lst = new ArrayList<ActivitiesListItem>();
-		lst.add(new ActivitiesListItem("basketball"));
-        lst.add(new ActivitiesListItem("chess club"));
-        lst.add(new ActivitiesListItem("arts & crafts"));
+		for(edu.upenn.cis350.Activity a : actlist){
+			lst.add(new ActivitiesListItem(a.getName()));
+		}
 		return lst;
 	}
 	
