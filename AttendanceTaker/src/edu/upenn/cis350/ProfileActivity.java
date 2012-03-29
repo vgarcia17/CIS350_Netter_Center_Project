@@ -44,7 +44,8 @@ public class ProfileActivity extends Activity{
 		showDialog(EDIT_ADDRESS);
 	}
 	
-    protected Dialog onCreateDialog(int id) {
+    @Override
+	protected Dialog onCreateDialog(int id) {
     	if (id == EDIT_NAME) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("New name:");

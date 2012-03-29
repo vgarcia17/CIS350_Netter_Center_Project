@@ -22,11 +22,11 @@ import android.widget.ViewSwitcher;
 public class ActivitiesAdapter extends BaseAdapter implements OnClickListener{
 	
 	private Context context;
-	private List<ActivitiesListItem> listActivities;
+	private List<ActivityObject> listActivities;
 	private static final int EDIT_ACTIVITY = 0;
 	
 	//constructor
-	public ActivitiesAdapter(Context context, List<ActivitiesListItem> listActivities){
+	public ActivitiesAdapter(Context context, List<ActivityObject> listActivities){
 		this.context = context;
 		this.listActivities = listActivities;
 	}
@@ -45,7 +45,7 @@ public class ActivitiesAdapter extends BaseAdapter implements OnClickListener{
 	
 	public View getView(int position, View convertView, ViewGroup viewGroup){
 		//gets entry associated with current row in ListView
-		ActivitiesListItem entry = listActivities.get(position);
+		ActivityObject entry = listActivities.get(position);
 		
 		//handles null case
 		if(convertView == null){

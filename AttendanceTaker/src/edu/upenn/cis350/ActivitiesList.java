@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 public class ActivitiesList extends Activity {
 
-	private List<ActivitiesListItem> listOfItems;
+	private List<ActivityObject> listOfItems;
 	private static final int ADD_ACTIVITY = 0;
 	private DatabaseHandler db;
 	
@@ -32,13 +32,14 @@ public class ActivitiesList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitieslist);
         db = new DatabaseHandler(this);
-        listOfItems = populateList();
+        
         createList();
+        db.close();
         
     }
     
     public void createList() {
-        
+    	listOfItems = populateList();
         ListView list = (ListView) findViewById(R.id.ActivitiesList);
         list.setClickable(true);
 
@@ -61,7 +62,8 @@ public class ActivitiesList extends Activity {
     	showDialog(ADD_ACTIVITY);
     }
     
-    protected Dialog onCreateDialog(int id) {
+    @Override
+	protected Dialog onCreateDialog(int id) {
     	if (id == ADD_ACTIVITY) {
 	    	AlertDialog.Builder builder = new AlertDialog.Builder(this);
             builder.setMessage("Enter activity name");
@@ -89,7 +91,8 @@ public class ActivitiesList extends Activity {
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	listOfItems.add(new ActivitiesListItem(activity_string));
+	    	        	//listOfItems.add(new ActivitiesListItem(activity_string));
+	    	        	db.addActivity(new ActivityObject(activity_string, 123));
 	    	        	dialog.cancel();
 	    	        	createList();
 	    	        }
@@ -106,13 +109,9 @@ public class ActivitiesList extends Activity {
     }
     
     /** creates and populates roster **/
-	public List<ActivitiesListItem> populateList(){
-		List<edu.upenn.cis350.Activity> actlist = db.getAllActivities();
-		List<ActivitiesListItem> lst = new ArrayList<ActivitiesListItem>();
-		for(edu.upenn.cis350.Activity a : actlist){
-			lst.add(new ActivitiesListItem(a.getName()));
-		}
-		return lst;
+	public List<ActivityObject> populateList(){
+		List<edu.upenn.cis350.ActivityObject> actlist = db.getAllActivities();
+		return actlist;
 	}
 	
 }
