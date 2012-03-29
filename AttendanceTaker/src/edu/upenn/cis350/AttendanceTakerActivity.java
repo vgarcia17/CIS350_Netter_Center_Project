@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -24,8 +23,8 @@ public class AttendanceTakerActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         showDialog(LOGIN_DIALOG);
-        //DatabaseHandler db = new DatabaseHandler(this);
-        
+        DatabaseHandler db = new DatabaseHandler(this);
+        //db.onCreate(db.getWritableDatabase());
         /*Log.d("Insert: ", "Inserting ..");
         db.addActivity(new edu.upenn.cis350.Activity("coding", 234));
         db.addActivity(new edu.upenn.cis350.Activity("chipotle", 124));

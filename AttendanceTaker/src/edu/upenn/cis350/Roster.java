@@ -1,5 +1,4 @@
 package edu.upenn.cis350;
-import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
@@ -30,20 +29,23 @@ import android.widget.Toast;
  */
 public class Roster extends Activity{
 
-	private List<RosterListItem> listOfItems;
+	private List<StudentObject> listOfItems;
 	private static final int ADD_STUDENT = 0;
+	private DatabaseHandler db;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roster);
-        listOfItems = populateRoster();
+        
+        db = new DatabaseHandler(this);
         createRoster(); 
+        db.close();
     }
     
     public void createRoster() {
-    	
+    	listOfItems = populateRoster();
         ListView list = (ListView) findViewById(R.id.RosterList);
         
         Log.v("list", list +" "+ findViewById(R.id.RosterList));
@@ -86,7 +88,7 @@ public class Roster extends Activity{
 		}
 		else{
 			String output = "";
-			for(RosterListItem i : listOfItems){
+			for(StudentObject i : listOfItems){
 				output += i.getName() + " : " + i.getStatus() + "\n";
 			}
 			Toast.makeText(getApplicationContext(), output,
@@ -123,7 +125,7 @@ public class Roster extends Activity{
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	listOfItems.add(new RosterListItem(activity_string, "Present"));
+	    	        	db.addStudent(new StudentObject(activity_string));
 	    	        	dialog.cancel();
 	    	        	createRoster();
 	    	        }
@@ -140,12 +142,13 @@ public class Roster extends Activity{
     }
     
 	/** creates and populates roster **/
-	public List<RosterListItem> populateRoster(){
-		List<RosterListItem> lst = new ArrayList<RosterListItem>();
-		lst.add(new RosterListItem("Sean W.", "Present"));
-        lst.add(new RosterListItem("Christian C.", "Present"));
-        lst.add(new RosterListItem("Rupi S.", "Present"));
-		return lst;
+	public List<StudentObject> populateRoster(){
+		List<StudentObject> actlist = db.getAllStudents();
+		//List<RosterListItem> lst = new ArrayList<RosterListItem>();
+		//lst.add(new RosterListItem("Sean W.", "Present"));
+        //lst.add(new RosterListItem("Christian C.", "Present"));
+        //lst.add(new RosterListItem("Rupi S.", "Present"));
+		return actlist;
 	}
 
 }

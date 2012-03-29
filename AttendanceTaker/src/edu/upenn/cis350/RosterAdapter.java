@@ -2,7 +2,6 @@ package edu.upenn.cis350;
 
 import java.util.List;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -21,10 +20,10 @@ import android.widget.TextView;
 public class RosterAdapter extends BaseAdapter implements OnClickListener{
 	
 	private Context context;
-	private List<RosterListItem> listRoster;
+	private List<StudentObject> listRoster;
 	
 	//constructor
-	public RosterAdapter(Context context, List<RosterListItem> listRoster){
+	public RosterAdapter(Context context, List<StudentObject> listRoster){
 		this.context = context;
 		this.listRoster = listRoster;
 	}
@@ -43,7 +42,7 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 	
 	public View getView(int position, View convertView, ViewGroup viewGroup){
 		//gets entry associated with current row in ListView
-		final RosterListItem entry = listRoster.get(position);
+		final StudentObject entry = listRoster.get(position);
 		
 		//handles null case
 		if(convertView == null){
