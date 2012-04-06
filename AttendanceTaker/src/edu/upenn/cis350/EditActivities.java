@@ -13,11 +13,6 @@ public class EditActivities extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editactivities);
     }
-
-    public void onAddActivityClick(View view) {
-    	Intent i = new Intent(this, AddActivity.class);
-    	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
-    }
     
     public void onBackButtonClick(View view) {
 		Intent i = new Intent();

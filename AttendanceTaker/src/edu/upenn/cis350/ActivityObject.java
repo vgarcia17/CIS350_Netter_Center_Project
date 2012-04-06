@@ -1,33 +1,35 @@
 package edu.upenn.cis350;
 
+import java.util.Date;
+
 public class ActivityObject {
 
-	    private int id;
+	    private String id;
 	    private String name;
-	    private int userid;
+	    private Date date;
 
 	    public ActivityObject(){
 	 
 	    }
 	    // constructor
-	    public ActivityObject(int id, String name, int userid){
+	    public ActivityObject(String id, String name, Date date){
 	        this.id = id;
 	        this.name = name;
-	        this.userid = userid;
+	        this.date = date;
 	    }
 	    
-	    public ActivityObject(String name, int userid){
-	    	this.name = name;
-	        this.userid = userid;
+	    public ActivityObject(String name){
+	       
+	        this.name = name;
 	    }
 
 	    // getting ID
-	    public int getID(){
+	    public String getID(){
 	        return this.id;
 	    }
 	 
 	    // setting id
-	    public void setID(int id){
+	    public void setID(String id){
 	        this.id = id;
 	    }
 	 
@@ -42,13 +44,13 @@ public class ActivityObject {
 	    }
 	 
 	    // getting userId
-	    public int getUserId(){
-	        return this.userid;
+	    public Date getDate(){
+	        return this.date;
 	    }
 	 
 	    // setting userId
-	    public void setUserId(int userid){
-	        this.userid = userid;
+	    public void setDate(Date d){
+	        this.date = d;
 	    }
 	
 }

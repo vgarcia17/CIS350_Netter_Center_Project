@@ -1,6 +1,8 @@
 package edu.upenn.cis350;
-import java.util.ArrayList;
+
 import java.util.List;
+
+import com.parse.ParseObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -25,28 +27,33 @@ import android.widget.Toast;
  * extends ListActivity. Each list item is defined in list_item.xml, 
  * while the overall layout is defined in roster.xml
  *
- * TODO: 	-when clicked, each list item should go to corresponding profile
- * 			-pull names from persistent data source
  */
 public class Roster extends Activity{
 
-	private List<RosterListItem> listOfItems;
+	private List<StudentObject> listOfItems;
 	private static final int ADD_STUDENT = 0;
+	private DatabaseHandler db;
+	private String activityName;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roster);
-        listOfItems = populateRoster();
+   
+        Bundle extras = getIntent().getExtras();
+        activityName = extras.getString("name");
+        
+        //db = new DatabaseHandler(this);
         createRoster(); 
+        //db.close();
     }
     
     public void createRoster() {
-    	
+    	listOfItems = populateRoster();
         ListView list = (ListView) findViewById(R.id.RosterList);
         
-        Log.v("list", list +" "+ findViewById(R.id.RosterList));
+        //Log.v("list", list +" "+ findViewById(R.id.RosterList));
         //handles null case
   		if(list == null){
   			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,6 +78,12 @@ public class Roster extends Activity{
         list.setAdapter(adapter);
  
     }
+    
+    /** creates and populates roster **/
+	public List<StudentObject> populateRoster(){
+		List<StudentObject> actlist = ParseHandler.getAllStudents();
+		return actlist;
+	}
 
 	
     public void onAddStudentClick(View view) {
@@ -86,12 +99,38 @@ public class Roster extends Activity{
 		}
 		else{
 			String output = "";
-			for(RosterListItem i : listOfItems){
+			for(StudentObject i : listOfItems){
 				output += i.getName() + " : " + i.getStatus() + "\n";
 			}
 			Toast.makeText(getApplicationContext(), output,
 	                Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	/**
+	 * under construction
+	 */
+	public void submitRoster(){
+		//A = getActivity();
+		Bundle extras = getIntent().getExtras();
+        String activityName = extras.getString("name");
+        //get Activity ParseObject with name == activityName
+        
+        //for each student S
+        for(StudentObject s: listOfItems){
+        	//get Student ParseObject p corresponding to this StudentObject
+        	
+        	ParseObject attendanceRow = new ParseObject("AttendanceRecord");
+        	
+        	//attendanceRow.put("date", get the date somehow);
+        	attendanceRow.put("studentName", s.getName());
+        	//attendanceRow.put("studentId", StudentParseObject.getId());
+        	//attendanceRow.put("activityName", ActivityParseObject.getName());
+        	//attendanceRow.put("activityId", ActivityParseObject.getId());
+        	attendanceRow.put("status", s.getStatus());
+
+        	attendanceRow.saveInBackground();
+        }
 	}
 	
     @Override
@@ -123,7 +162,7 @@ public class Roster extends Activity{
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	listOfItems.add(new RosterListItem(activity_string, "Present"));
+	    	        	ParseHandler.addStudent(new StudentObject(activity_string));
 	    	        	dialog.cancel();
 	    	        	createRoster();
 	    	        }
@@ -138,14 +177,4 @@ public class Roster extends Activity{
     	}
     	else return null;
     }
-    
-	/** creates and populates roster **/
-	public List<RosterListItem> populateRoster(){
-		List<RosterListItem> lst = new ArrayList<RosterListItem>();
-		lst.add(new RosterListItem("Sean W.", "Present"));
-        lst.add(new RosterListItem("Christian C.", "Present"));
-        lst.add(new RosterListItem("Rupi S.", "Present"));
-		return lst;
-	}
-
 }

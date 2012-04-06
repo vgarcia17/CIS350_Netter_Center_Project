@@ -14,16 +14,15 @@ import android.widget.TextView;
 /**
  * Custom adapter for the ListView used in Roster.
  * Allows multiple pieces of data to be placed in each row of the list
- * Holds the following data: Student Name, Status, and a Button to cycle Status
  *
  */
 public class RosterAdapter extends BaseAdapter implements OnClickListener{
 	
 	private Context context;
-	private List<RosterListItem> listRoster;
+	private List<StudentObject> listRoster;
 	
 	//constructor
-	public RosterAdapter(Context context, List<RosterListItem> listRoster){
+	public RosterAdapter(Context context, List<StudentObject> listRoster){
 		this.context = context;
 		this.listRoster = listRoster;
 	}
@@ -42,7 +41,7 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 	
 	public View getView(int position, View convertView, ViewGroup viewGroup){
 		//gets entry associated with current row in ListView
-		final RosterListItem entry = listRoster.get(position);
+		final StudentObject entry = listRoster.get(position);
 		
 		//handles null case
 		if(convertView == null){
@@ -68,10 +67,8 @@ public class RosterAdapter extends BaseAdapter implements OnClickListener{
 				for(int i=0; i < radiogroup.getChildCount(); i++){  
 					RadioButton btn = (RadioButton) radiogroup.getChildAt(i);  
 					if(btn.getId() == checkedId){  
-						{  
-							entry.setStatus(btn.getText()+"");                   
-							return;    
-						}      
+						entry.setStatus(btn.getText()+"");                   
+						return;   
 					}  
 				}
 			}
