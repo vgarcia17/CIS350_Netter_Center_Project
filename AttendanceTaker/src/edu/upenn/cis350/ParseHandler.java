@@ -90,15 +90,14 @@ public class ParseHandler {
 		String sid = s.getStudentid();
 		String aid = a.getID();
 		ParseObject rosterAdd = new ParseObject("Roster");
-		//rosterAdd.put("studentId", sid)
-		//rosterAdd.put("activityId", aid);
-		//rosterAdd.saveInBackground();
+		rosterAdd.put("studentId", sid);
+		rosterAdd.put("activityId", aid);
+		rosterAdd.saveInBackground();
 	}
 	
 	public static void addStudent(StudentObject s){
 		ParseObject student = new ParseObject("Student");
-		student.put("Name", s.getName());
-		student.put("Phone", s.getPhone());
+		student.put("name", s.getName());
         student.saveInBackground();
 	}
 	
@@ -164,7 +163,7 @@ public class ParseHandler {
 		try{
 			queryList = query.find();
 			for(ParseObject p : queryList){
-				ParseObject student = (ParseObject) p.get("student");
+				ParseObject student = (ParseObject) p.get("studentId");
 				studentList.add(new StudentObject(student.getObjectId(), student.getString("name")));
 			}
 		}
