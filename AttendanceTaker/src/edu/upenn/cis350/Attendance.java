@@ -14,9 +14,4 @@ public class Attendance extends Activity{
         setContentView(R.layout.attendance);
     }
 	
-    public void onEditActivitiesClick(View view) {
-    	Intent i = new Intent(this, AddActivity.class);
-    	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_AddActivity);
-    }
-	
 }

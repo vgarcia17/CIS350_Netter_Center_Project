@@ -5,7 +5,7 @@ package edu.upenn.cis350;
 
 public class StudentObject {
 
-	private int studentid;
+	private String studentid;
 	private int gradeLevel;
 	private String name;
 	private String phone;
@@ -20,7 +20,7 @@ public class StudentObject {
 	public StudentObject(){
 		
 	}
-	public StudentObject(int studentid, int gradeLevel, String name,
+	public StudentObject(String studentid, int gradeLevel, String name,
 			String phone, String address, String school, String site,
 			String program, String contactName, String contactType) {
 		this.studentid = studentid;
@@ -33,6 +33,11 @@ public class StudentObject {
 		this.program = program;
 		this.contactName = contactName;
 		this.contactType = contactType;
+	}
+	
+	public StudentObject(String studentid, String name){
+		this.studentid = studentid;
+		this.name = name;
 	}
 	
 	public StudentObject(String name){
@@ -63,11 +68,11 @@ public class StudentObject {
 		this.address = address;
 	}
 
-	public int getStudentid() {
+	public String getStudentid() {
 		return studentid;
 	}
 
-	public void setStudentid(int studentid) {
+	public void setStudentid(String studentid) {
 		this.studentid = studentid;
 	}
 

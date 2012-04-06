@@ -1,5 +1,8 @@
 package edu.upenn.cis350;
+
 import java.util.List;
+
+import com.parse.ParseObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,23 +33,27 @@ public class Roster extends Activity{
 	private List<StudentObject> listOfItems;
 	private static final int ADD_STUDENT = 0;
 	private DatabaseHandler db;
+	private String activityName;
 	
 	/** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.roster);
+   
+        Bundle extras = getIntent().getExtras();
+        activityName = extras.getString("name");
         
-        db = new DatabaseHandler(this);
+        //db = new DatabaseHandler(this);
         createRoster(); 
-        db.close();
+        //db.close();
     }
     
     public void createRoster() {
     	listOfItems = populateRoster();
         ListView list = (ListView) findViewById(R.id.RosterList);
         
-        Log.v("list", list +" "+ findViewById(R.id.RosterList));
+        //Log.v("list", list +" "+ findViewById(R.id.RosterList));
         //handles null case
   		if(list == null){
   			LayoutInflater inflater = (LayoutInflater) getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -71,6 +78,12 @@ public class Roster extends Activity{
         list.setAdapter(adapter);
  
     }
+    
+    /** creates and populates roster **/
+	public List<StudentObject> populateRoster(){
+		List<StudentObject> actlist = ParseHandler.getAllStudents();
+		return actlist;
+	}
 
 	
     public void onAddStudentClick(View view) {
@@ -92,6 +105,32 @@ public class Roster extends Activity{
 			Toast.makeText(getApplicationContext(), output,
 	                Toast.LENGTH_SHORT).show();
 		}
+	}
+	
+	/**
+	 * under construction
+	 */
+	public void submitRoster(){
+		//A = getActivity();
+		Bundle extras = getIntent().getExtras();
+        String activityName = extras.getString("name");
+        //get Activity ParseObject with name == activityName
+        
+        //for each student S
+        for(StudentObject s: listOfItems){
+        	//get Student ParseObject p corresponding to this StudentObject
+        	
+        	ParseObject attendanceRow = new ParseObject("AttendanceRecord");
+        	
+        	//attendanceRow.put("date", get the date somehow);
+        	attendanceRow.put("studentName", s.getName());
+        	//attendanceRow.put("studentId", StudentParseObject.getId());
+        	//attendanceRow.put("activityName", ActivityParseObject.getName());
+        	//attendanceRow.put("activityId", ActivityParseObject.getId());
+        	attendanceRow.put("status", s.getStatus());
+
+        	attendanceRow.saveInBackground();
+        }
 	}
 	
     @Override
@@ -123,7 +162,7 @@ public class Roster extends Activity{
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	db.addStudent(new StudentObject(activity_string));
+	    	        	ParseHandler.addStudent(new StudentObject(activity_string));
 	    	        	dialog.cancel();
 	    	        	createRoster();
 	    	        }
@@ -138,11 +177,4 @@ public class Roster extends Activity{
     	}
     	else return null;
     }
-    
-	/** creates and populates roster **/
-	public List<StudentObject> populateRoster(){
-		List<StudentObject> actlist = db.getAllStudents();
-		return actlist;
-	}
-
 }

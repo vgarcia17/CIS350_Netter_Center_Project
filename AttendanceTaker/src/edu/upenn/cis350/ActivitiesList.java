@@ -2,6 +2,8 @@ package edu.upenn.cis350;
 
 import java.util.List;
 
+import com.parse.Parse;
+
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -30,25 +32,28 @@ public class ActivitiesList extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activitieslist);
-        db = new DatabaseHandler(this);
+        //db = new DatabaseHandler(this);
+        
+        Parse.initialize(this, "cuoXWbqvBKs8SUrhnyKdyNWiMPZxuDBZ31ehltVI", "tl8VMcFHu7u3haym9KSbRKEP61MmxPDvmL06dxeo"); 
         
         createList();
-        db.close();
+        //db.close();
         
     }
     
     public void createList() {
     	listOfItems = populateList();
-        ListView list = (ListView) findViewById(R.id.ActivitiesList);
-        list.setClickable(true);
-
         ActivitiesAdapter adapter = new ActivitiesAdapter(this, listOfItems);
         
+        ListView list = (ListView) findViewById(R.id.ActivitiesList);
+        list.setClickable(true);
         //click listener for each list item - on click, goes to Roster page
         list.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
-              int position, long id) {          
+              int position, long id) {  
+        	String name = listOfItems.get(position).getName();
             Intent i = new Intent(view.getContext(), Roster.class);
+      	  	i.putExtra("name", name);
         	startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_Roster);
           }
         });
@@ -90,7 +95,8 @@ public class ActivitiesList extends Activity {
     	        		toast.show();
 	    	        }
 	    	        else {
-	    	        	db.addActivity(new ActivityObject(activity_string, 123));
+	    	        	//db.addActivity(new ActivityObject(activity_string, 123));
+	    	        	ParseHandler.addActivity(activity_string);
 	    	        	dialog.cancel();
 	    	        	createList();
 	    	        }
@@ -108,7 +114,8 @@ public class ActivitiesList extends Activity {
     
     /** creates and populates roster **/
 	public List<ActivityObject> populateList(){
-		List<edu.upenn.cis350.ActivityObject> actlist = db.getAllActivities();
+		List<ActivityObject> actlist = ParseHandler.getAllActivities();
+		//List<edu.upenn.cis350.ActivityObject> actlist = db.getAllActivities();
 		return actlist;
 	}
 	

@@ -16,13 +16,14 @@ public class DatabaseHandler extends SQLiteOpenHelper{
 	private static final String TABLE_ACTIVITY = "Activity";
 	private static final String TABLE_USER = "User";
 	private static final String TABLE_STUDENT = "Student";
+	private static final String TABLE_MEMBEROF = "MemberOf";
  
     // Activity Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_NAME = "name";
     private static final String KEY_USERID = "userid";
     
-    // Activity Table Columns names
+    // Student Table Columns names
     private static final String KEY_STUD_ID = "studentid";
     private static final String KEY_STUD_GRADE = "grade";
     private static final String KEY_STUD_NAME = "name";
@@ -33,6 +34,10 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     private static final String KEY_STUD_PROGRAM = "program";
     private static final String KEY_STUD_CONTACTNAME = "contactName";
     private static final String KEY_STUD_CONTACTTYPE = "contactType";
+    
+    //MemberOf Table Columns names
+    private static final String KEY_A_ID = "a_id";
+    private static final String KEY_S_ID = "s_id";
     
     public DatabaseHandler(Context context){
     	super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -56,14 +61,20 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 + KEY_STUD_CONTACTTYPE + " TEXT"
                 +")";
     	db.execSQL(CREATE_STUDENT_TABLE);
+    	
+    	String CREATE_MEMBEROF_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_MEMBEROF + "("
+                + KEY_A_ID + " INTEGER PRIMARY KEY," + KEY_S_ID + " INTEGER" + ")";
+    	db.execSQL(CREATE_MEMBEROF_TABLE);
     }
     
     //Upgrading database
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion){
     	//drop older table if existed
-    	//db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACTIVITY);
-    	//db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
+    	db.execSQL("DROP TABLE IF EXISTS " + TABLE_ACTIVITY);
+    	db.execSQL("DROP TABLE IF EXISTS " + TABLE_STUDENT);
+    	db.execSQL("DROP TABLE IF EXISTS " + TABLE_MEMBEROF);
+
     	
     	//create tables again
     	onCreate(db);
@@ -75,7 +86,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	
     	ContentValues values = new ContentValues();
     	values.put(KEY_NAME, activity.getName());
-    	values.put(KEY_USERID, activity.getUserId());
+    	//values.put(KEY_USERID, activity.getUserId());
     	
     	//inserts row
     	db.insert(TABLE_ACTIVITY, null, values);
@@ -101,8 +112,19 @@ public class DatabaseHandler extends SQLiteOpenHelper{
     	db.close();
     }
     
+    public void addMember(ActivityObject activity, StudentObject student){
+    	SQLiteDatabase db = this.getWritableDatabase();
+    	ContentValues values = new ContentValues();
+    	values.put(KEY_A_ID, activity.getID());
+    	values.put(KEY_S_ID, student.getStudentid());
+    	
+    	db.insert(TABLE_MEMBEROF, null, values);
+    	db.close();
+    	
+    }
+    
     //gets an activity
-    public ActivityObject getActivity(int id){
+    /*public ActivityObject getActivity(int id){
     	SQLiteDatabase db = this.getReadableDatabase();
     	
     	Cursor cursor = db.query(TABLE_ACTIVITY, new String[] { KEY_ID,
@@ -115,7 +137,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
                 cursor.getString(1), Integer.parseInt(cursor.getString(2)));
        
         return activity;
-    }
+    }*/
     
     public List<ActivityObject> getAllActivities() {
         List<ActivityObject> activityList = new ArrayList<ActivityObject>();
@@ -129,9 +151,9 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
             	ActivityObject activity = new ActivityObject();
-                activity.setID(Integer.parseInt(cursor.getString(0)));
+                //activity.setID(Integer.parseInt(cursor.getString(0)));
                 activity.setName(cursor.getString(1));
-                activity.setUserId(Integer.parseInt(cursor.getString(2)));
+                //activity.setUserId(Integer.parseInt(cursor.getString(2)));
                 // Adding contact to list
                 activityList.add(activity);
             } while (cursor.moveToNext());
@@ -139,6 +161,28 @@ public class DatabaseHandler extends SQLiteOpenHelper{
  
         // return contact list
         return activityList;
+    }
+    
+    public List<String> getAllMembers(){
+    	List<String> memberList = new ArrayList<String>();
+    	
+    	String selectQuery = "SELECT * FROM " + TABLE_MEMBEROF;
+    	SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+        
+ 
+        if (cursor.moveToFirst()) {
+            do {
+            	String result = "";
+            	result += cursor.getString(0) + " ";
+            	result += cursor.getString(1);
+                
+                // Adding student to list
+                memberList.add(result);   
+                
+            } while (cursor.moveToNext());
+        }
+    	return memberList;
     }
     
     public List<StudentObject> getAllStudents(){
@@ -153,7 +197,7 @@ public class DatabaseHandler extends SQLiteOpenHelper{
         if (cursor.moveToFirst()) {
             do {
             	StudentObject student = new StudentObject();
-            	student.setStudentid(Integer.parseInt(cursor.getString(0)));
+            	//student.setStudentid(Integer.parseInt(cursor.getString(0)));
             	student.setGradeLevel(Integer.parseInt(cursor.getString(1)));
             	student.setName(cursor.getString(2));
             	student.setPhone(cursor.getString(3));
