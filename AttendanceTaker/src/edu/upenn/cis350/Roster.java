@@ -30,7 +30,7 @@ import android.widget.Toast;
  */
 public class Roster extends Activity{
 
-	private List<StudentObject> listOfItems;
+	private List<StudentObject> listOfItems; //change variable name
 	private static final int ADD_STUDENT = 0;
 	private DatabaseHandler db;
 	private String activityName;
@@ -42,7 +42,7 @@ public class Roster extends Activity{
         setContentView(R.layout.roster);
    
         Bundle extras = getIntent().getExtras();
-        activityName = extras.getString("name");
+        activityName = extras.getString("Name");
         
         //db = new DatabaseHandler(this);
         createRoster(); 
@@ -68,9 +68,30 @@ public class Roster extends Activity{
         list.setOnItemClickListener(new OnItemClickListener() {
           public void onItemClick(AdapterView<?> parent, View view,
               int position, long id) {
-        	  String name = listOfItems.get(position).getName();
+        	  // get info for the student to be displayed
+        	  StudentObject student = listOfItems.get(position);
+        	  String name = student.getName();
+        	  String idNumber = student.getStudentid();
+        	  int grade = student.getGradeLevel();
+        	  String phone = student.getPhone();
+        	  String address = student.getAddress();
+        	  String school = student.getSchool();
+        	  String site = student.getSite();
+        	  String contactName = student.getContactName();
+        	  String contactType = student.getContactType();
+        	  
         	  Intent i = new Intent(view.getContext(), ProfileActivity.class);
-        	  i.putExtra("name", name);
+        	  
+        	  // put info for the student in intent
+        	  i.putExtra("Name", name);
+        	  i.putExtra("idNumber", idNumber);
+        	  i.putExtra("grade", grade);
+        	  i.putExtra("phone", phone);
+        	  i.putExtra("address", address);
+        	  i.putExtra("school", school);
+        	  i.putExtra("site", site);
+        	  i.putExtra("contactName", contactName);
+        	  i.putExtra("contactType", contactType);
         	  startActivityForResult(i, AttendanceTakerActivity.ACTIVITY_ProfileActivity);
           }
         });
@@ -113,7 +134,7 @@ public class Roster extends Activity{
 	public void submitRoster(){
 		//A = getActivity();
 		Bundle extras = getIntent().getExtras();
-        String activityName = extras.getString("name");
+        String activityName = extras.getString("Name");
         //get Activity ParseObject with name == activityName
         
         //for each student S

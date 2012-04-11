@@ -29,6 +29,7 @@ public class AttendanceTakerActivity extends Activity {
         
         //initializes connection with Parse
         Parse.initialize(this, "cuoXWbqvBKs8SUrhnyKdyNWiMPZxuDBZ31ehltVI", "tl8VMcFHu7u3haym9KSbRKEP61MmxPDvmL06dxeo"); 
+        System.out.println("here");
     }
     
     public void onLoginClick(View view) {

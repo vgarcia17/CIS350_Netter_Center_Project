@@ -24,9 +24,49 @@ public class ProfileActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profileactivity);
         Bundle extras = getIntent().getExtras();
-        String name = extras.getString("name");
-        TextView t = (TextView)findViewById(R.id.profileName);
-        t.setText(name);
+        
+        String studentName = extras.getString("Name");
+        TextView studentNameView = (TextView)findViewById(R.id.profileName);
+        studentNameView.setText(studentName);
+        
+        String studentPhoneNumber = extras.getString("phone");
+        TextView phoneNumberView = (TextView)findViewById(R.id.profilePhone);
+        phoneNumberView.setText(studentPhoneNumber);
+        
+        String studentAddress = extras.getString("address");
+        TextView studentAddressView = (TextView)findViewById(R.id.profileAddress);
+        studentAddressView.setText(studentAddress);
+        
+        String studentIDNumber = extras.getString("idNumber");
+        TextView studentIDNumberView = (TextView)findViewById(R.id.profileIDNumber);
+        studentIDNumberView.setText(studentIDNumber);
+        
+        String studentContactName = extras.getString("contactName");
+        TextView studentContactNameView = (TextView)findViewById(R.id.profileEmergContName);
+        studentContactNameView.setText(studentContactName);
+        
+        String studentContactType = extras.getString("contactType");
+        TextView studentContactTypeView = (TextView)findViewById(R.id.profileEmergContType);
+        studentContactTypeView.setText(studentContactType);
+        
+        String studentSite = extras.getString("site");
+        TextView studentSiteView = (TextView)findViewById(R.id.profileSite);
+        studentSiteView.setText(studentSite);
+        
+        String studentGrade = extras.getString("grade");
+        TextView studentGradeView = (TextView)findViewById(R.id.profileGrade);
+        studentGradeView.setText(studentGrade);
+        
+        String studentSchool = extras.getString("school");
+        TextView studentSchoolView = (TextView)findViewById(R.id.profileSchool);
+        studentSchoolView.setText(studentSchool);
+        
+        
+        
+        
+        
+        
+        
     }
 
 	public void onEditNameButtonClick(View view) {

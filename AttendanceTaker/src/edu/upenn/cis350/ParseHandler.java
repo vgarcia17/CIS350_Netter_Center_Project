@@ -26,7 +26,7 @@ public class ParseHandler {
 	 */
 	public static void addActivity(String name){
         ParseObject activity = new ParseObject("Activity");
-        activity.put("name", name);
+        activity.put("Name", name);
         activity.saveInBackground();
 	}
 	
@@ -41,7 +41,7 @@ public class ParseHandler {
 		
 		try{
 			ParseObject p = query.getFirst();
-			activity = new ActivityObject(p.getObjectId(), p.getString("name"), p.getUpdatedAt());
+			activity = new ActivityObject(p.getObjectId(), p.getString("Name"), p.getUpdatedAt());
 		} catch(ParseException e){
 			e.printStackTrace();
 		}
@@ -56,7 +56,7 @@ public class ParseHandler {
 		
 		try {
 			ParseObject a = query.getFirst();	
-			activity = new ActivityObject(a.getObjectId(),a.getString("name"),a.getUpdatedAt());
+			activity = new ActivityObject(a.getObjectId(),a.getString("Name"),a.getUpdatedAt());
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -72,7 +72,7 @@ public class ParseHandler {
 		try{
 			queryList = query.find();
 			for(ParseObject p : queryList){
-				activityList.add(new ActivityObject(p.getObjectId(), p.getString("name"), p.getUpdatedAt()));
+				activityList.add(new ActivityObject(p.getObjectId(), p.getString("Name"), p.getUpdatedAt()));
 			}
 		}
 		catch(ParseException e){
@@ -97,7 +97,7 @@ public class ParseHandler {
 	
 	public static void addStudent(StudentObject s){
 		ParseObject student = new ParseObject("Student");
-		student.put("name", s.getName());
+		student.put("Name", s.getName());
         student.saveInBackground();
 	}
 	
@@ -108,7 +108,7 @@ public class ParseHandler {
 		
 		try{
 			ParseObject p = query.getFirst();
-			student = new StudentObject(p.getObjectId(), p.getString("name"));
+			student = new StudentObject(p.getObjectId(), p.getString("Name"));
 		} catch(ParseException e){
 			e.printStackTrace();
 		}
@@ -119,11 +119,13 @@ public class ParseHandler {
 	public static StudentObject getStudentByName(String name){
 		StudentObject student = new StudentObject();
 		ParseQuery query = new ParseQuery("Student");
-		query.whereEqualTo("name", name);
+		query.whereEqualTo("Name", name);
 		
 		try {
 			ParseObject a = query.getFirst();	
-			student = new StudentObject(a.getObjectId(),a.getString("name"));
+			student = new StudentObject(a.getNumber("ID").toString(), a.getNumber("Parse_1112GradeLevel").intValue(),
+					a.getString("Name"),a.getString("phoneNumber"),a.getString("Address"), a.getString("School"), a.getString("Site"),"Program?",
+					a.getString("emergencyContanctName"), a.getString("emergencyContanctRelationship"));
 			
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -139,8 +141,10 @@ public class ParseHandler {
 		try{
 			queryList = query.find();
 			Log.v("hello", queryList.size()+"");
-			for(ParseObject p : queryList){
-				studentList.add(new StudentObject(p.getObjectId(), p.getString("name")));
+			for(ParseObject student : queryList){
+				studentList.add(new StudentObject(student.getNumber("ID").toString(), student.getNumber("Parse_1112GradeLevel").intValue(),
+						student.getString("Name"),student.getString("phoneNumber"),student.getString("Address"), student.getString("School"), student.getString("Site"),"Program?",
+						student.getString("emergencyContactName"), student.getString("emergencyContactRelationship")));
 			}
 		}
 		catch(ParseException e){
@@ -164,7 +168,9 @@ public class ParseHandler {
 			queryList = query.find();
 			for(ParseObject p : queryList){
 				ParseObject student = (ParseObject) p.get("studentId");
-				studentList.add(new StudentObject(student.getObjectId(), student.getString("name")));
+				studentList.add(new StudentObject(student.getNumber("ID").toString(), student.getNumber("Parse_1112GradeLevel").intValue(),
+						student.getString("Name"),student.getString("phoneNumber"),student.getString("Address"), student.getString("School"), student.getString("Site"),"Program?",
+						student.getString("emergencyContactName"), student.getString("emergencyContactRelationship")));
 			}
 		}
 		catch(ParseException e){
